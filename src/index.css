@@ -1,13 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Pangolin&display=swap');
+
+:root {
+  --background-color: rgb(224, 146, 86);
+  --cover-font: "Luckiest Guy", cursive;
+  --cover-footer-font: "Pangolin", cursive;
+}
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  padding: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  background-color: var(--background-color);
+  cursor: default;
 }
