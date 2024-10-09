@@ -12,7 +12,7 @@
     width: clamp(300px, 70vw, 800px);
     border-radius: 10px;
     rotate: -2deg;
-    animation: __bounceInUp 2s ease-in;
+    animation: __bounceInUp 1s ease-in;
 }
 .diary-cover {
     display: flex;
@@ -25,54 +25,11 @@
 }
 @keyframes __bounceInUp {
     0% {
-        transform: translateY(-20px);
+        transform: translate(-20px, -20px);
     }
     100% {
-        transform: translateY(0);
+        transform: translate(0);
     }
-}
-/*Heart-img*/
-.heart-container {
-    position: absolute;
-    /*right: clamp(50px, 15vw, 1000px);*/
-    /*top: 40%;*/
-    height: 100px;
-    width: 100px;
-}
-.fa-heart {
-    position: relative;
-    color: red;
-}
-.heart-img1 {
-    left: clamp(110px, 13vw, 250px);
-    top: 0;
-    rotate: 30deg;
-    font-size: 30px;
-}
-.heart-img2 {
-    left: clamp(100px, 11vw, 700px);
-    top: clamp(25px, 3vh, 30px);
-    rotate: 30deg;
-    font-size: 20px;
-}
-
-.fa-paw {
-    position: absolute;
-    font-size: clamp(30px, 4vw, 60px);
-}
-.paw-img1 {
-    left: 5%;
-    top: clamp(170px, 10%, 200px);
-}
-.paw-img2 {
-    left: 13%;
-    top: clamp(130px, 10%, 200px);
-}
-.paw-img3 {
-    right: 10%;
-    top: clamp(350px, 55%, 500px);
-    rotate: 45deg;
-    color: rgb(122,169,191);
 }
 
 .diary-cover h1 {
@@ -83,29 +40,22 @@
     border-radius: 50%;
     border: 1px solid black;
 }
-.diary-cover img {
-    height: clamp(250px, 35vh, 600px);
-    width: clamp(450px, 70vw, 1200px);
+.tori-img {
     position: relative;
     bottom: 30px;
     left: 0;
+    height: clamp(250px, 35vh, 600px);
+    width: clamp(450px, 40vw, 1200px);
+    z-index: 11;
 }
-
-.diary-footer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    column-gap: clamp(30px, 7vw, 100px);
-    width: clamp(250px, 30vw, 1200px);
-    position: absolute;
-    bottom: 10px;
-    height: 50px;
-    background-color: white;
-    border-radius: 100px;
+.tori-img img {
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    transition: transform 1s ease-in;
 }
-.diary-footer p {
-    font-size: clamp(15px, 1.5vw, 40px);
-    font-family: var(--cover-footer-font);
+.tori-img img:hover {
+    transform: scale(1.5);
 }
 
 .diary-page {
@@ -128,13 +78,30 @@
     z-index: -5;
 }
 
+.diary-footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: clamp(30px, 7vw, 100px);
+    width: clamp(250px, 30vw, 1200px);
+    position: absolute;
+    bottom: 10px;
+    height: 50px;
+    background-color: white;
+    border-radius: 100px;
+}
+.diary-footer p {
+    font-size: clamp(15px, 1.5vw, 40px);
+    font-family: var(--cover-footer-font);
+}
+
 
 /*Spring-image*/
 .spring-container {
     position: absolute;
     top: 10px;
     right: 20px;
-    z-index: 100;
+    z-index: 10;
     height: clamp(400px, 59vh, 900px);
     width: clamp(300px, 70vw, 800px);
     overflow: hidden;
@@ -158,4 +125,47 @@
     left: 0;
     top: -3px;
     margin-bottom: 1px;
+}
+
+/*Heart-img*/
+.heart-container {
+    position: absolute;
+    height: 100px;
+    width: 100px;
+}
+.fa-heart {
+    position: relative;
+    color: #f31515;
+}
+.heart-img1 {
+    left: clamp(110px, 13vw, 250px);
+    top: 0;
+    rotate: 30deg;
+    font-size: 30px;
+}
+.heart-img2 {
+    left: clamp(100px, 11vw, 700px);
+    top: clamp(25px, 3vh, 30px);
+    rotate: 30deg;
+    font-size: 20px;
+}
+
+/*Paw-image*/
+.fa-paw {
+    position: absolute;
+    font-size: clamp(30px, 4vw, 60px);
+}
+.paw-img1 {
+    left: 5%;
+    top: clamp(190px, 22vh, 300px);
+}
+.paw-img2 {
+    left: 13%;
+    top: clamp(160px, 18vh, 270px);
+}
+.paw-img3 {
+    right: 10%;
+    top: clamp(300px, 40vh, 500px);
+    rotate: 45deg;
+    color: rgb(122,169,191);
 }

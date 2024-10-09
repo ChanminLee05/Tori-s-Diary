@@ -31,7 +31,9 @@ const CoverPage: React.FC = () => {
                     <i className="fa-solid fa-paw paw-img1"></i>
                     <i className="fa-solid fa-paw paw-img2"></i>
                     <i className="fa-solid fa-paw paw-img3"></i>
-                    <img src={Cover} alt="dog"/>
+                    <div className="tori-img">
+                        <img src={Cover} alt="dog"/>
+                    </div>
                     <div className="diary-footer">
                         <p><b>School</b></p>
                         <p><b>Grade</b></p>
