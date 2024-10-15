@@ -1,12 +1,14 @@
 import React, {useEffect} from 'react';
+import { useNavigate } from 'react-router-dom';
 import "./CoverPage.css";
-import Dog from "../Assets/dog1.png";
-import Cover from "../Assets/tori-cover.png";
+import Dog from "../../Assets/dog1.png";
+import Cover from "../../Assets/tori-cover.png";
 const CoverPage: React.FC = () => {
+    const navigate = useNavigate();
 
     useEffect(() => {
         const springContainer = document.getElementById('spring-container');
-        const numCircles = 8;
+        const numCircles = 11;
         if (springContainer) {
             for (let i = 0; i < numCircles; i++) {
                 const topLeft = document.createElement('div');
@@ -17,9 +19,16 @@ const CoverPage: React.FC = () => {
                 springContainer.appendChild(bottomLeft);
             }
         }
-    }, []);
+
+        const timeOutId = setTimeout(() => {
+            navigate('/diary');
+        }, 6000);
+
+        return () => clearTimeout(timeOutId);
+    }, [navigate]);
+
     return (
-        <section className="cover-page" >
+        <section className="cover-page">
             <div className="diary-container">
                 <div className="diary diary-cover">
                     <div id="spring-container" className="spring-container"></div>
