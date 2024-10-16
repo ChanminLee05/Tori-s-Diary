@@ -30,7 +30,7 @@ const CalendarComponent:React.FC<CalendarProps> = ({ value, onChange, onClickDay
                             style={{
                                 width: '3.5vw',
                                 position: 'absolute',
-                                bottom: '5px',
+                                bottom: '-3px',
                                 left: '28px',
                                 opacity: '0.5',
                             }}
