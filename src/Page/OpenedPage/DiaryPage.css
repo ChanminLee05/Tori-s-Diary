@@ -22,6 +22,7 @@
     justify-content: flex-end;
     align-items: center;
     transition: width 0.5s ease;
+    outline: none;
 }
 .open-calendar-btn:hover {
     width: 11vw;
@@ -58,52 +59,6 @@
     height: 2.3vw;
 }
 
-/*Calendar*/
-.calendar {
-    position: absolute;
-    top: 3vw;
-    right: 50%;
-    width: 50vw;
-    height: 85vh;
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    z-index: 999;
-    opacity: 0;
-    transition: opacity 0.3s ease-in;
-}
-.calendar.active {
-    animation: slideIn 1s ease-in forwards;
-    opacity: 1;
-}
-
-.calendar.close {
-    animation: slideOut 1s ease-in forwards;
-    opacity: 1;
-    pointer-events: none;
-}
-
-@keyframes slideIn {
-    0% {
-        right: 0;
-        opacity: 0;
-    }
-    100% {
-        right: 25%;
-        opacity: 1;
-    }
-}
-
-@keyframes slideOut {
-    0% {
-        right: 25%;
-        opacity: 1;
-    }
-    100% {
-        right: 0;
-        opacity: 0;
-    }
-}
 
 .diary-paper {
     background-color: #f4ddab;
@@ -143,7 +98,11 @@
     padding: 10px 20px 0 20px;
 }
 .date-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     padding: 0 5px 0 5px;
+    width: 25vw;
 }
 .date {
     border: none;
