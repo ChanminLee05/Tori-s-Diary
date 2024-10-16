@@ -5,31 +5,106 @@
     width: 100vw;
     height: 100vh;
     position: relative;
+
 }
+/*Calendar button*/
 .open-calendar-btn {
     position: absolute;
     top: 50%;
     right: 0;
-    transform: translate(-50%, -50%);
-    width: 5vw;
-    height: 5vw;
-    background-color: red;
+    transform: translate(0, -50%);
+    width: 10vw;
+    height: 10vw;
+    border: none;
+    background-color: white;
+    clip-path: circle(50.0% at 100% 50%);
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    transition: width 0.5s ease;
 }
-.calendar.close {
-    display: none;
+.open-calendar-btn:hover {
+    width: 11vw;
+    clip-path: ellipse(50% 50% at 93% 50%);
+}
+.calendar-icon {
+    margin-right: 10px;
+    font-size: 1.5vw;
+    width: 1.8vw;
+    height: 1.8vw;
+}
+.fa-chevron-left {
+    color: #505050;
+}
+.open-calendar-btn:hover .fa-chevron-left {
+    animation: infiniteSlideIn 1s ease-in infinite;
+}
+@keyframes infiniteSlideIn {
+    0% {
+        transform: translateX(0);
+    }
+    50% {
+        transform: translateX(-10%);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+.calendar-img {
+    transition: width 0.2s ease, height 1s ease;
+}
+.open-calendar-btn:hover .calendar-img {
+    width: 2.3vw;
+    height: 2.3vw;
+}
+
+/*Calendar*/
+.calendar {
+    position: absolute;
+    top: 3vw;
+    right: 50%;
+    width: 50vw;
+    height: 85vh;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 999;
+    opacity: 0;
+    transition: opacity 0.3s ease-in;
 }
 .calendar.active {
-    display: block;
-    justify-content: center;
-    align-items: center;
-    background-color: white;
-    height: 85vh;
-    width: 40vw;
-    border-radius: 10px;
-    z-index: 999;
-    position: absolute;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    animation: slideIn 1s ease-in forwards;
+    opacity: 1;
 }
+
+.calendar.close {
+    animation: slideOut 1s ease-in forwards;
+    opacity: 1;
+    pointer-events: none;
+}
+
+@keyframes slideIn {
+    0% {
+        right: 0;
+        opacity: 0;
+    }
+    100% {
+        right: 25%;
+        opacity: 1;
+    }
+}
+
+@keyframes slideOut {
+    0% {
+        right: 25%;
+        opacity: 1;
+    }
+    100% {
+        right: 0;
+        opacity: 0;
+    }
+}
+
 .diary-paper {
     background-color: #f4ddab;
     height: 90vh;
@@ -38,6 +113,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: filter 0.3s ease-in-out;
+}
+.diary-paper.blur {
+    filter: blur(2px);
 }
 .page-opened {
     max-width: 100%;
