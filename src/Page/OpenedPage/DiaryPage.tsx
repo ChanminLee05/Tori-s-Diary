@@ -1,10 +1,16 @@
 import React, {useState} from 'react';
 import "./DiaryPage.css";
 import Sample from "../../Assets/sample.webp";
-import Calendar from "../../Assets/calendar-icon.png";
+import CalendarIcon from "../../Assets/calendar-icon.png";
+import CalendarComponent from "../../Component/Calendar/Calendar";
+import {Value} from "react-calendar/dist/cjs/shared/types";
+
 const DiaryPage:React.FC = () => {
     const [toggleWeather, setToggleWeather] = useState("");
     const [isToggleCalendar, setToggleCalendar] = useState(false);
+    const [value, onChange] = useState<Value>(new Date());
+    const [selectedDate, setSelectedDate] = useState(new Date());
+
     function clickWeather(weatherType: string) {
         setToggleWeather(weatherType);
     }
@@ -14,18 +20,31 @@ const DiaryPage:React.FC = () => {
         console.log(isToggleCalendar)
     }
 
+    function goToDay(day: Date) {
+        setSelectedDate(day)
+        setToggleCalendar(!isToggleCalendar);
+        // console.log('today is ', day)
+    }
+
+    const day = selectedDate.toLocaleDateString('en-CA');
+
         return (
         <section className="diary-page-open">
             <button className="open-calendar-btn" onClick={toggleCalendar}>
                 <i className="fa-solid fa-chevron-left calendar-icon"></i>
-                <img src={Calendar} alt="" className="calendar-img calendar-icon"/>
+                <img src={CalendarIcon} alt="" className="calendar-img calendar-icon"/>
             </button>
-            <div className={`calendar ${isToggleCalendar ? 'active' : 'close'}`}></div>
+            <CalendarComponent
+                value={value}
+                onChange={onChange}
+                onClickDay={goToDay}
+                isToggleCalendar={isToggleCalendar}
+            />
             <div className={`diary-paper ${isToggleCalendar ? 'blur' : ''}`}>
                 <div className="page-opened">
                     <div className="diary-header">
                         <div className="date-text"><p>Date</p></div>
-                        <div className="date-section"><input type="date" className="date"/></div>
+                        <div className="date-section">{day}</div>
                         <div className="weather-text"><p>Weather</p></div>
                         <div className="weather">
                             <button
