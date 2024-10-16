@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import "./DiaryPage.css";
-import Tori1 from "../../Assets/tori-groom.jpg";
 import Sample from "../../Assets/sample.webp";
+import Calendar from "../../Assets/calendar-icon.png";
 const DiaryPage:React.FC = () => {
     const [toggleWeather, setToggleWeather] = useState("");
     const [isToggleCalendar, setToggleCalendar] = useState(false);
@@ -16,9 +16,12 @@ const DiaryPage:React.FC = () => {
 
         return (
         <section className="diary-page-open">
-            <button className="open-calendar-btn" onClick={toggleCalendar}></button>
+            <button className="open-calendar-btn" onClick={toggleCalendar}>
+                <i className="fa-solid fa-chevron-left calendar-icon"></i>
+                <img src={Calendar} alt="" className="calendar-img calendar-icon"/>
+            </button>
             <div className={`calendar ${isToggleCalendar ? 'active' : 'close'}`}></div>
-            <div className="diary-paper">
+            <div className={`diary-paper ${isToggleCalendar ? 'blur' : ''}`}>
                 <div className="page-opened">
                     <div className="diary-header">
                         <div className="date-text"><p>Date</p></div>
