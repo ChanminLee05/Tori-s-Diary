@@ -5,6 +5,7 @@
     width: 100vw;
     height: 100vh;
     position: relative;
+    perspective: 1000px;
 }
 .diary {
     background-color: #f4ddab;
@@ -13,6 +14,9 @@
     border-radius: 10px;
     rotate: -2deg;
     animation: __bounceInUp 1s ease-in;
+    transform-style: preserve-3d;
+    transition: transform 0.6s ease-in-out;
+    cursor: pointer;
 }
 .diary-cover {
     display: flex;
@@ -22,13 +26,28 @@
     box-shadow: 20px 20px 20px 0 rgba(0,0,0,0.2);
     z-index: 3;
     position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transform-origin: left;
+    transition: transform 1s;
+    height: 35vw;
 }
+.diary-open {
+    transform: rotateY(-160deg) translate(50%, -50%);
+}
+.cover-open {
+    height: 31vw;
+    top: 53%;
+    left: 52%;
+}
+
 @keyframes __bounceInUp {
     0% {
-        transform: translate(-20px, -20px);
+        transform: translate(-70%, -70%);
     }
     100% {
-        transform: translate(0);
+        transform: translate(-50%, -50%);
     }
 }
 
@@ -36,7 +55,7 @@
     font-size: 4vw;
     font-family: var(--cover-font);
     background-color: white;
-    padding: 1vw;
+    padding: 2vw;
     margin-top: 2vw;
     border-radius: 50%;
     border: 1px solid black;
@@ -55,19 +74,26 @@
 }
 
 .diary-page {
-    position: relative;
-    left: 18vw;
-    bottom: -0.5vw;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-49%, -49%);
     z-index: -2;
     background-color: white;
     border-radius: 10px;
-    box-shadow: 20px 20px 20px 0 rgba(0,0,0,0.2);
+    box-shadow: 10px 10px 10px 0 rgba(0,0,0,0.2);
+    transform-origin: left;
+    transition: transform 1s ease-in-out, z-index 0s;
+    transition-delay: 0.2s;
+    border: 1px solid #b2b2b2;
 }
+
 .diary-back {
-    position: relative;
-    right: 16.5vw;
-    bottom: -0.8vw;
-    z-index: -5;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-45%, -47%);
+    z-index: -15;
 }
 
 .diary-footer {
@@ -83,6 +109,7 @@
 .diary-footer p {
     font-size: 1.5vw;
     font-family: var(--cover-footer-font);
+    padding-top: 1vw;
 }
 
 
@@ -92,7 +119,7 @@
     top: 1vw;
     right: 1vw;
     z-index: 10;
-    height: 32.9vw;
+    height: 32.5vw;
     width: 100%;
     overflow: hidden;
 }
@@ -103,15 +130,15 @@
 }
 .top-left {
     border-top-left-radius: 100px;
-    border-left: 25px solid black;
-    border-top: 25px solid black;
+    border-left: 5px solid black;
+    border-top: 5px solid black;
     left: 0;
     top: 0;
 }
 .bottom-left {
     border-bottom-left-radius: 100px;
-    border-left: 25px solid black;
-    border-bottom: 25px solid black;
+    border-left: 5px solid black;
+    border-bottom: 5px solid black;
     left: 0;
     top: -5px;
     margin-bottom: 0.2vw;

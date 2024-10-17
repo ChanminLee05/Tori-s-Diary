@@ -53,7 +53,6 @@
     line-height: 4rem !important;
     font-size: 2vw !important;
     border-radius: 5px;
-    font-family: var(--diary-header-font) !important;
 }
 
 .react-calendar__navigation {
