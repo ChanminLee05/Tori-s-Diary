@@ -17,7 +17,7 @@ const DiaryPage:React.FC = () => {
 
     function toggleCalendar() {
         setToggleCalendar(!isToggleCalendar);
-        console.log(isToggleCalendar)
+        // console.log(isToggleCalendar)
     }
 
     function goToDay(day: Date) {

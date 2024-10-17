@@ -10,16 +10,19 @@
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     z-index: 999;
     opacity: 0;
+    visibility: hidden;
     transition: opacity 0.3s ease-in;
 }
 .calendar.active {
     animation: slideIn 1s ease-in forwards;
     opacity: 1;
+    visibility: visible;
 }
 
 .calendar.close {
     animation: slideOut 1s ease-in forwards;
     opacity: 1;
+    visibility: hidden;
     pointer-events: none;
 }
 
@@ -59,6 +62,25 @@
 .react-calendar__navigation button {
     min-width: 60px !important;
 }
-.react-calendar__navigation button:focus {
 
+/*Month Tile*/
+.react-calendar__year-view .react-calendar__tile, .react-calendar__decade-view .react-calendar__tile, .react-calendar__century-view .react-calendar__tile {
+    padding: 1em;
+}
+
+/*Selected Title Control*/
+.react-calendar__tile--active {
+    background-color: #f4ddab;
+}
+.react-calendar__tile--active:enabled:hover, .react-calendar__tile--active:enabled:focus {
+    background-color: #f4ddab;
+}
+
+/*Today Title*/
+.react-calendar__tile--now {
+    background-color: transparent;
+}
+
+abbr {
+    font-weight: bolder;
 }
