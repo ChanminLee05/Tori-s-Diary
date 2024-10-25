@@ -1,0 +1,67 @@
+/*Calendar button*/
+.open-menu-btn {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translate(0, -50%);
+    width: 7vw;
+    height: 10vw;
+    border: none;
+    background-color: white;
+    clip-path: circle(50.0% at 100% 50%);
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    transition: width 0.1s ease-out;
+    outline: none;
+}
+.open-menu-btn:hover {
+    width: 8vw;
+}
+.open-menu-btn.expanded {
+    width: 15vw;
+    clip-path: ellipse(71% 66% at 83% 50%);
+    .calendar-icon, .gallery-icon {
+        display: block;
+        margin-right: 20px;
+    }
+    .gallery-icon {
+        /*margin-right: 3vw;*/
+    }
+}
+.toggle-icon {
+    font-size: 1.5vw;
+    width: 3vw;
+    height: 3vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.calendar-icon, .gallery-icon {
+    display: none;
+}
+
+.fa-chevron-left {
+    color: #505050;
+}
+.open-menu-btn:hover .fa-chevron-left {
+    animation: infiniteSlideIn 1s ease-in infinite;
+}
+@keyframes infiniteSlideIn {
+    0% {
+        transform: translateX(0);
+    }
+    50% {
+        transform: translateX(-10%);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+.calendar-img {
+    transition: width 0.2s ease, height 1s ease;
+}
+.open-calendar-btn:hover .calendar-img {
+    width: 2.3vw;
+    height: 2.3vw;
+}

@@ -1,39 +1,133 @@
-import React, {useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import "./DiaryPage.css";
-import Sample from "../../Assets/sample.webp";
-import CalendarIcon from "../../Assets/calendar-icon.png";
 import CalendarComponent from "../../Component/Calendar/Calendar";
 import {Value} from "react-calendar/dist/cjs/shared/types";
+import CalendarButton from "../../Component/Buttons/CalendarButton/CalendarButton";
+import {saveDiaryData, loadDiaryData} from "../../Component/FireBase/FireBase";
+import Save from "../../Assets/dog-save.png";
 
 const DiaryPage:React.FC = () => {
+    const [isToggleMenu, setToggleMenu] = useState(false);
+    const [isToggleCalendar, setIsToggleCalendar] = useState(false);
     const [toggleWeather, setToggleWeather] = useState("");
-    const [isToggleCalendar, setToggleCalendar] = useState(false);
+    const [isDataSaved, setIsDataSaved] = useState<boolean | null>(null);
+    const [showSaveMessage, setShowSaveMessage] = useState<boolean>(false);
+
     const [value, onChange] = useState<Value>(new Date());
     const [selectedDate, setSelectedDate] = useState(new Date());
+    const [selectedImage, setSelectedImage] = useState<string | ArrayBuffer | null>(null);
+    const fileInputRef = useRef<HTMLInputElement | null>(null);
+    const [weather, setWeather] = useState('');
+    const [title, setTitle] = useState('');
+    const [content, setContent] = useState('');
+
 
     function clickWeather(weatherType: string) {
         setToggleWeather(weatherType);
+        if (weatherType === 'sun') {
+            setWeather('sun')
+        } else if (weatherType === 'cloud') {
+            setWeather('cloud')
+        } else if (weatherType === 'umbrella') {
+            setWeather('umbrella')
+        } else if (weatherType === 'snow') {
+            setWeather('snow')
+        } else {
+            setWeather('')
+            console.log("There is some error")
+        }
+        // console.log(weatherType)
+    }
+
+    function toggleMenu() {
+        setToggleMenu(!isToggleMenu);
+        console.log("Menu",isToggleMenu)
     }
 
     function toggleCalendar() {
-        setToggleCalendar(!isToggleCalendar);
-        // console.log(isToggleCalendar)
+        setIsToggleCalendar(!isToggleCalendar);
+        setToggleMenu(!isToggleMenu);
+        console.log("Calendar",isToggleCalendar)
     }
 
     function goToDay(day: Date) {
         setSelectedDate(day)
-        setToggleCalendar(!isToggleCalendar);
+        setIsToggleCalendar(!isToggleCalendar);
+        setToggleMenu(false);
         // console.log('today is ', day)
     }
 
     const day = selectedDate.toLocaleDateString('en-CA');
 
-        return (
+    function handleImageChange(event: React.ChangeEvent<HTMLInputElement>) {
+        const file = event.target.files?.[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setSelectedImage(reader.result);
+            }
+            reader.readAsDataURL(file);
+        }
+    }
+
+    function handleImageClick() {
+        if (fileInputRef.current) {
+            fileInputRef.current.click();
+            console.log("Image clicked!");
+        }
+    }
+
+    function handleSave(e: React.MouseEvent<HTMLButtonElement>) {
+        e.preventDefault();
+        saveDiaryData(selectedImage, title, content, weather, day)
+            .then(() => {
+                setIsDataSaved(true);
+                setShowSaveMessage(true);
+
+                setTimeout(() => {
+                    setShowSaveMessage(false);
+                    setIsDataSaved(null);
+                }, 5000)
+            })
+            .catch((error) => {
+                setIsDataSaved(false);
+                setShowSaveMessage(true);
+                console.error("Error saving diary:", error);
+
+                setTimeout(() => {
+                    setShowSaveMessage(false);
+                    setIsDataSaved(null);
+                }, 5000)
+            });
+    }
+
+    useEffect(() => {
+        async function fetchDiaryData() {
+            const data = await loadDiaryData(day);
+            if (data) {
+                setSelectedImage(data.image || null);
+                setTitle(data.title || '');
+                setContent(data.content || '');
+                setWeather(data.weather || '');
+                setToggleWeather(data.weather || '');
+            } else {
+                setSelectedImage(null);
+                setTitle('');
+                setContent('');
+                setWeather('');
+                setToggleWeather('');
+            }
+        }
+        fetchDiaryData();
+    }, [day]);
+
+    return (
         <section className="diary-page-open">
-            <button className="open-calendar-btn" onClick={toggleCalendar}>
-                <i className="fa-solid fa-chevron-left calendar-icon"></i>
-                <img src={CalendarIcon} alt="" className="calendar-img calendar-icon"/>
-            </button>
+            <CalendarButton
+                isToggleMenu={isToggleMenu}
+                toggleMenu={toggleMenu}
+                toggleCalendar={toggleCalendar}
+            />
             <CalendarComponent
                 value={value}
                 onChange={onChange}
@@ -69,14 +163,48 @@ const DiaryPage:React.FC = () => {
                             </button>
                         </div>
                     </div>
-                    <div className="diary-img">
-                        <img className="diary-img" src={Sample} alt="tori's first grooming"/>
+                    <div className="diary-img-container">
+                        {selectedImage ? (
+                            <img
+                                className="diary-img"
+                                src={selectedImage as string} // Display selected image
+                                alt="uploaded preview"
+                                onClick={handleImageClick} // Properly assign handleImageClick here
+                            />
+                        ) : (
+                            <input
+                                type="file"
+                                accept="image/*"
+                                onChange={handleImageChange}
+                            />
+                        )}
+                        <input
+                            type="file"
+                            accept="image/*"
+                            onChange={handleImageChange}
+                            ref={fileInputRef}
+                            style={{ display: 'none' }}
+                        />
                     </div>
                     <div className="title-text">
                         <p>Title</p>
-                        <textarea className="title-textarea"></textarea>
+                        <textarea
+                            className="title-textarea"
+                            value={title}
+                            onChange={(e) => setTitle(e.target.value)}
+                        />
                     </div>
-                    <textarea className="text-grid"></textarea>
+                    <textarea
+                        className="text-grid"
+                        value={content}
+                        onChange={(e) => setContent(e.target.value)}
+                    />
+                    <button className="save-btn" onClick={handleSave}>
+                        <img src={Save} alt="" className="save-img"/>
+                    </button>
+                    <div className={`save-txt ${isDataSaved ? 'success' : 'fail'}`}>
+                        {showSaveMessage ? (isDataSaved ? "Saved!" : "Fail!") : ""}
+                    </div>
                 </div>
             </div>
         </section>

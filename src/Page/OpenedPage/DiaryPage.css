@@ -6,61 +6,9 @@
     height: 100vh;
     position: relative;
 }
-/*Calendar button*/
-.open-calendar-btn {
-    position: absolute;
-    top: 50%;
-    right: 0;
-    transform: translate(0, -50%);
-    width: 10vw;
-    height: 10vw;
-    border: none;
-    background-color: white;
-    clip-path: circle(50.0% at 100% 50%);
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    transition: width 0.1s ease-out;
-    outline: none;
-}
-.open-calendar-btn:hover {
-    width: 11vw;
-    clip-path: ellipse(50% 50% at 93% 50%);
-}
-.calendar-icon {
-    margin-right: 10px;
-    font-size: 1.5vw;
-    width: 1.8vw;
-    height: 1.8vw;
-}
-.fa-chevron-left {
-    color: #505050;
-}
-.open-calendar-btn:hover .fa-chevron-left {
-    animation: infiniteSlideIn 1s ease-in infinite;
-}
-@keyframes infiniteSlideIn {
-    0% {
-        transform: translateX(0);
-    }
-    50% {
-        transform: translateX(-10%);
-    }
-    100% {
-        transform: translateX(0);
-    }
-}
-.calendar-img {
-    transition: width 0.2s ease, height 1s ease;
-}
-.open-calendar-btn:hover .calendar-img {
-    width: 2.3vw;
-    height: 2.3vw;
-}
-
 
 .diary-paper {
-    background-color: #f4ddab;
+    background-color: var(--diary-color);
     height: 90vh;
     width: 55vw;
     border-radius: 10px;
@@ -152,6 +100,7 @@
     overflow-y: hidden;
     resize: none;
     padding-left: 20px;
+    font-family: var(--diary-font);
 }
 .title-textarea {
     border: none;
@@ -177,18 +126,48 @@
             transparent 45px);
     background-size: 47px 52px;
     line-height: 50px;
-    letter-spacing: 18px;
-    word-spacing: 21px;
+    letter-spacing: 22px;
+    word-spacing: 20px;
     font-size: 1.5vw;
     overflow-y: hidden;
+    font-family: var(--diary-font);
 }
 .diary-img {
     width: 100%;
-    height: 45vh;
+    height: 39vh;
     border-left: 1px solid black;
     border-right: 1px solid black;
+    cursor: pointer;
 }
-
+.save-btn {
+    position: fixed;
+    bottom: 2.5vw;
+    right: 12vw;
+    border: none;
+    background: none;
+    outline: none;
+}
+.save-img {
+    width: 100px;
+    height: auto;
+}
+.save-txt {
+    display: none;
+}
+.save-txt.success {
+    display: block;
+    position: absolute;
+    bottom: 7.5vw;
+    right: 12vw;
+    color: white;
+}
+.save-txt.fail {
+    display: block;
+    position: absolute;
+    bottom: 7.5vw;
+    right: 13vw;
+    color: red;
+}
 /*Weather-img*/
 .bi {
     font-size: 2vw;
@@ -214,9 +193,6 @@
 }
 .row3 {
     height: 40px;
-}
-.row4 {
-
 }
 
 /*Mobile-size*/

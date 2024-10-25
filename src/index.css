@@ -1,9 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Delius+Swash+Caps&family=Luckiest+Guy&family=Pangolin&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Gaegu&family=Delius+Swash+Caps&family=Luckiest+Guy&family=Pangolin&display=swap');
 :root {
   --background-color: rgb(224, 146, 86);
+  --diary-color: #f4ddab;
   --cover-font: "Luckiest Guy", cursive;
   --cover-footer-font: "Pangolin", cursive;
-  --diary-header-font: "Delius Swash Caps", cursive;
+  --diary-font: "Gaegu", sans-serif;
 }
 body {
   margin: 0;
@@ -13,3 +14,9 @@ body {
   background-color: var(--background-color);
   cursor: default;
 }
+
+
+/**::before,*/
+/**::after {*/
+/*  outline: solid 2px red;*/
+/*}*/
