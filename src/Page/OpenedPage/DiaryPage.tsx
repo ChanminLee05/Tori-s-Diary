@@ -41,13 +41,13 @@ const DiaryPage:React.FC = () => {
 
     function toggleMenu() {
         setToggleMenu(!isToggleMenu);
-        console.log("Menu",isToggleMenu)
+        // console.log("Menu",isToggleMenu)
     }
 
     function toggleCalendar() {
         setIsToggleCalendar(!isToggleCalendar);
         setToggleMenu(!isToggleMenu);
-        console.log("Calendar",isToggleCalendar)
+        // console.log("Calendar",isToggleCalendar)
     }
 
     function goToDay(day: Date) {
@@ -62,9 +62,14 @@ const DiaryPage:React.FC = () => {
     function handleImageChange(event: React.ChangeEvent<HTMLInputElement>) {
         const file = event.target.files?.[0];
         if (file) {
+            if (file.size > 1048487) {
+                alert("Image size exceeds 1 MB. Please choose a smaller file.");
+                setIsDataSaved(false);
+                return;
+            }
             const reader = new FileReader();
             reader.onloadend = () => {
-                setSelectedImage(reader.result);
+                setSelectedImage(reader.result as string);
             }
             reader.readAsDataURL(file);
         }
@@ -167,9 +172,9 @@ const DiaryPage:React.FC = () => {
                         {selectedImage ? (
                             <img
                                 className="diary-img"
-                                src={selectedImage as string} // Display selected image
+                                src={selectedImage as string}
                                 alt="uploaded preview"
-                                onClick={handleImageClick} // Properly assign handleImageClick here
+                                onClick={handleImageClick}
                             />
                         ) : (
                             <input
