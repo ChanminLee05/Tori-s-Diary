@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import "./CoverPage.css";
 import Dog from "../../Assets/dog1.png";
 import Cover from "../../Assets/tori-cover.png";
+import Family from "../../Assets/family.jpg";
 const CoverPage: React.FC = () => {
     const navigate = useNavigate();
     const [isOpenDiary, setOpenDiary] = useState(false);
@@ -67,7 +68,15 @@ const CoverPage: React.FC = () => {
                     } else if (dataType === 'diary-page4') {
                         diaryPage.style.fontSize = '2vw'
                         diaryPage.style.padding = '2vw'
-                        diaryPage.innerText = "By Chanmin & Eunji"
+                        const text = document.createElement('p');
+                        text.innerText = "By Chanmin & Eunji";
+                        text.className = "page-text";
+                        diaryPage.appendChild(text);
+                        const img = document.createElement('img');
+                        img.src = Family;
+                        img.alt = "";
+                        img.className = "page-img"
+                        diaryPage.appendChild(img)
                     }
                 }, index * 200);
             }
