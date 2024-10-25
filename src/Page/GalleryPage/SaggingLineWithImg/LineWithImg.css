@@ -1,0 +1,13 @@
+.photo-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 20vw;
+}
+.sagging-line {
+    width: 100%;
+    height: 3vw;
+}
+
+

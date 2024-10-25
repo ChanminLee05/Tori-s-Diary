@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import CalendarIcon from "../../../Assets/calendar-icon.png";
 import "../ButtonCSS.css";
 import GalleryButton from "../GalleryButton/GalleryButton";
+import {useNavigate} from "react-router-dom";
 
 type CalendarButtonProps = {
     isToggleMenu: boolean;
@@ -10,10 +11,11 @@ type CalendarButtonProps = {
 }
 const CalendarButton: React.FC<CalendarButtonProps> = ({isToggleMenu, toggleMenu, toggleCalendar}) => {
     const [isToggleGallery, setIsToggleGallery] = useState(false);
-
+    const navigate = useNavigate();
     function toggleGallery() {
         setIsToggleGallery(!isToggleGallery)
-        console.log("Gallery",isToggleGallery)
+        navigate('/gallery')
+        // console.log("Gallery",isToggleGallery)
     }
 
     return (
