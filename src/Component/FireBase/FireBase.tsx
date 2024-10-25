@@ -1,5 +1,5 @@
 import {initializeApp} from 'firebase/app';
-import { getFirestore, doc, getDoc, setDoc } from 'firebase/firestore';
+import {collection, doc, getDoc, getDocs, getFirestore, setDoc} from 'firebase/firestore';
 
 const firebaseConfig = {
     apiKey: "AIzaSyCnyO02R3G9wsIQMWoZmDkKiqcIq9097zQ",
@@ -45,31 +45,31 @@ export async function loadDiaryData(day: string) {
     }
 }
 
-export async function saveGalleryData(selectedImage: string | ArrayBuffer | null, title: string, day: string) {
-    const docRef = doc(db, "gallery", day);
+export async function saveGalleryData(selectedImage: string | ArrayBuffer | null, day: string, imageId: string) {
+    const imageDocRef = doc(db, "gallery", day, "images", imageId);
+
     try {
-        await setDoc(docRef, {
-            image: selectedImage,
-            title: title,
-        })
-        console.log("data saved")
+        await setDoc(imageDocRef, {
+            url: selectedImage,
+        });
+        console.log("Image saved to gallery!");
     } catch (err) {
-        console.log("Error", err)
+        console.error("Error saving image:", err);
     }
 }
 
-export async function loadGalleryData(day: string) {
-    const docRef = doc(db, "gallery", day);
+export async function loadGalleryData(day: string, imageId: string) {
+    const imageDocRef = doc(db, "gallery", day, "images", imageId);
     try {
-        const docSnap = await getDoc(docRef);
+        const docSnap = await getDoc(imageDocRef);
         if (docSnap.exists()) {
-            return docSnap.data();
+            return docSnap.data()?.url || null;
         } else {
-            console.log("No data exist")
+            console.log("No image found for this day and imageId.");
             return null;
         }
     } catch (err) {
-        console.log("Error", err)
+        console.error("Error loading image:", err);
         return null;
     }
 }

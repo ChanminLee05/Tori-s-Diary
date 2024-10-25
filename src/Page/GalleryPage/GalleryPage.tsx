@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import "./GalleryPage.css";
 import LineWithImg from "./SaggingLineWithImg/LineWithImg";
 import CalendarButton from "../../Component/Buttons/CalendarButton/CalendarButton";
@@ -10,14 +10,16 @@ const GalleryPage:React.FC = () => {
     const { isMenuOpen, isCalendarOpen, toggleMenu, toggleCalendar } = useToggle();
     const [value, onChange] = useState<Value>(new Date());
     const [selectedDate, setSelectedDate] = useState(new Date());
+
     function goToDay(day: Date) {
         setSelectedDate(day)
         toggleCalendar();
         // console.log('today is ', day)
     }
+
     return (
         <div className="gallery-page">
-            <LineWithImg />
+            <LineWithImg selectedDate={selectedDate}/>
             <CalendarButton
                 isToggleMenu={isMenuOpen}
                 toggleMenu={toggleMenu}
