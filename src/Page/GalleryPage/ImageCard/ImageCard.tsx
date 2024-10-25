@@ -34,9 +34,6 @@ const ImageCard:React.FC<ImageCardProps> = ({ cardTitle }) => {
                     style={{ display: 'none' }}
                 />
             </div>
-            <div className="card-body">
-                <h5 className="card-title">{cardTitle}</h5>
-            </div>
         </div>
     );
 };
