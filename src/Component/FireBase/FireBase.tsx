@@ -44,3 +44,32 @@ export async function loadDiaryData(day: string) {
         return null;
     }
 }
+
+export async function saveGalleryData(selectedImage: string | ArrayBuffer | null, title: string, day: string) {
+    const docRef = doc(db, "gallery", day);
+    try {
+        await setDoc(docRef, {
+            image: selectedImage,
+            title: title,
+        })
+        console.log("data saved")
+    } catch (err) {
+        console.log("Error", err)
+    }
+}
+
+export async function loadGalleryData(day: string) {
+    const docRef = doc(db, "gallery", day);
+    try {
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+            return docSnap.data();
+        } else {
+            console.log("No data exist")
+            return null;
+        }
+    } catch (err) {
+        console.log("Error", err)
+        return null;
+    }
+}

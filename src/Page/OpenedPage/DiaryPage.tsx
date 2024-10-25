@@ -5,105 +5,59 @@ import {Value} from "react-calendar/dist/cjs/shared/types";
 import CalendarButton from "../../Component/Buttons/CalendarButton/CalendarButton";
 import {saveDiaryData, loadDiaryData} from "../../Component/FireBase/FireBase";
 import Save from "../../Assets/dog-save.png";
+import {useHandleImage} from "../../Features/HandleImage/HandleImage";
 
 const DiaryPage:React.FC = () => {
-    const [isToggleMenu, setToggleMenu] = useState(false);
-    const [isToggleCalendar, setIsToggleCalendar] = useState(false);
-    const [toggleWeather, setToggleWeather] = useState("");
-    const [isDataSaved, setIsDataSaved] = useState<boolean | null>(null);
+    const [isMenuOpen, setMenuOpen] = useState(false);
+    const [isCalendarOpen, setCalendarOpen] = useState(false);
+    const [isDataSaved, setDataSaved] = useState<boolean | null>(null);
     const [showSaveMessage, setShowSaveMessage] = useState<boolean>(false);
 
     const [value, onChange] = useState<Value>(new Date());
     const [selectedDate, setSelectedDate] = useState(new Date());
-    const [selectedImage, setSelectedImage] = useState<string | ArrayBuffer | null>(null);
-    const fileInputRef = useRef<HTMLInputElement | null>(null);
     const [weather, setWeather] = useState('');
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
 
+    const { selectedImage, setSelectedImage, fileInputRef, handleImageChange, handleImageClick } = useHandleImage();
 
-    function clickWeather(weatherType: string) {
-        setToggleWeather(weatherType);
-        if (weatherType === 'sun') {
-            setWeather('sun')
-        } else if (weatherType === 'cloud') {
-            setWeather('cloud')
-        } else if (weatherType === 'umbrella') {
-            setWeather('umbrella')
-        } else if (weatherType === 'snow') {
-            setWeather('snow')
-        } else {
-            setWeather('')
-            console.log("There is some error")
-        }
-        // console.log(weatherType)
+    const day = selectedDate.toLocaleDateString('en-CA');
+
+    function handleWeatherSelection(weatherType: string) {
+        setWeather(weatherType);
     }
 
     function toggleMenu() {
-        setToggleMenu(!isToggleMenu);
-        // console.log("Menu",isToggleMenu)
+        setMenuOpen((prev) => !prev);
+        // console.log("Menu",isMenuOpen)
     }
 
     function toggleCalendar() {
-        setIsToggleCalendar(!isToggleCalendar);
-        setToggleMenu(!isToggleMenu);
-        // console.log("Calendar",isToggleCalendar)
+        setCalendarOpen((prev) => !prev);
+        setMenuOpen(false);
+        // console.log("Calendar",isCalendarOpen)
     }
 
     function goToDay(day: Date) {
         setSelectedDate(day)
-        setIsToggleCalendar(!isToggleCalendar);
-        setToggleMenu(false);
+        setCalendarOpen(false);
+        setMenuOpen(false);
         // console.log('today is ', day)
     }
 
-    const day = selectedDate.toLocaleDateString('en-CA');
-
-    function handleImageChange(event: React.ChangeEvent<HTMLInputElement>) {
-        const file = event.target.files?.[0];
-        if (file) {
-            if (file.size > 1048487) {
-                alert("Image size exceeds 1 MB. Please choose a smaller file.");
-                setIsDataSaved(false);
-                return;
-            }
-            const reader = new FileReader();
-            reader.onloadend = () => {
-                setSelectedImage(reader.result as string);
-            }
-            reader.readAsDataURL(file);
-        }
-    }
-
-    function handleImageClick() {
-        if (fileInputRef.current) {
-            fileInputRef.current.click();
-            console.log("Image clicked!");
-        }
-    }
-
-    function handleSave(e: React.MouseEvent<HTMLButtonElement>) {
+    async function handleSave(e: React.MouseEvent<HTMLButtonElement>) {
         e.preventDefault();
-        saveDiaryData(selectedImage, title, content, weather, day)
-            .then(() => {
-                setIsDataSaved(true);
-                setShowSaveMessage(true);
-
-                setTimeout(() => {
-                    setShowSaveMessage(false);
-                    setIsDataSaved(null);
-                }, 5000)
-            })
-            .catch((error) => {
-                setIsDataSaved(false);
-                setShowSaveMessage(true);
-                console.error("Error saving diary:", error);
-
-                setTimeout(() => {
-                    setShowSaveMessage(false);
-                    setIsDataSaved(null);
-                }, 5000)
-            });
+        await saveDiaryData(selectedImage, title, content, weather, day)
+        try {
+            await saveDiaryData(selectedImage, title, content, weather, day);
+            setDataSaved(true);
+        } catch (error) {
+            setDataSaved(false);
+            console.error("Error saving diary:", error);
+        } finally {
+            setShowSaveMessage(true);
+            setTimeout(() => setShowSaveMessage(false), 5000);
+        }
     }
 
     useEffect(() => {
@@ -114,13 +68,11 @@ const DiaryPage:React.FC = () => {
                 setTitle(data.title || '');
                 setContent(data.content || '');
                 setWeather(data.weather || '');
-                setToggleWeather(data.weather || '');
             } else {
                 setSelectedImage(null);
                 setTitle('');
                 setContent('');
                 setWeather('');
-                setToggleWeather('');
             }
         }
         fetchDiaryData();
@@ -129,7 +81,7 @@ const DiaryPage:React.FC = () => {
     return (
         <section className="diary-page-open">
             <CalendarButton
-                isToggleMenu={isToggleMenu}
+                isToggleMenu={isMenuOpen}
                 toggleMenu={toggleMenu}
                 toggleCalendar={toggleCalendar}
             />
@@ -137,35 +89,23 @@ const DiaryPage:React.FC = () => {
                 value={value}
                 onChange={onChange}
                 onClickDay={goToDay}
-                isToggleCalendar={isToggleCalendar}
+                isToggleCalendar={isCalendarOpen}
             />
-            <div className={`diary-paper ${isToggleCalendar ? 'blur' : ''}`}>
+            <div className={`diary-paper ${isCalendarOpen ? 'blur' : ''}`}>
                 <div className="page-opened">
                     <div className="diary-header">
                         <div className="date-text"><p>Date</p></div>
                         <div className="date-section">{day}</div>
                         <div className="weather-text"><p>Weather</p></div>
                         <div className="weather">
-                            <button
-                                className={`weather-btn ${toggleWeather === 'sun' ? 'active' : ''}`}
-                                onClick={() => clickWeather('sun')}>
-                                <i className="bi bi-sun"></i>
-                            </button>
-                            <button
-                                className={`weather-btn ${toggleWeather === 'cloud' ? 'active' : ''}`}
-                                onClick={() => clickWeather('cloud')}>
-                                <i className="bi bi-cloud"></i>
-                            </button>
-                            <button
-                                className={`weather-btn ${toggleWeather === 'umbrella' ? 'active' : ''}`}
-                                onClick={() => clickWeather('umbrella')}>
-                                <i className="bi bi-umbrella"></i>
-                            </button>
-                            <button
-                                className={`weather-btn ${toggleWeather === 'snow' ? 'active' : ''}`}
-                                onClick={() => clickWeather('snow')}>
-                                <i className="bi bi-cloud-snow"></i>
-                            </button>
+                            {['sun', 'cloud', 'umbrella', 'snow'].map((type) => (
+                                <button
+                                    key={type}
+                                    className={`weather-btn ${weather === type ? 'active' : ''}`}
+                                    onClick={() => handleWeatherSelection(type)}>
+                                    <i className={`bi bi-${type}`}></i>
+                                </button>
+                            ))}
                         </div>
                     </div>
                     <div className="diary-img-container">
