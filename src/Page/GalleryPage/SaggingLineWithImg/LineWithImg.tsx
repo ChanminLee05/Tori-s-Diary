@@ -3,6 +3,7 @@ import "./LineWithImg.css";
 import Dog from "../../../Assets/dog1.png";
 import ImageCard from "../ImageCard/ImageCard";
 
+
 const LineWithImg:React.FC = () => {
     const cards = [1, 2, 3, 4, 5, 6, 7];
     return (
@@ -13,7 +14,10 @@ const LineWithImg:React.FC = () => {
                 </svg>
                 <div className="image-card-container">
                     {cards.map((card, index) => (
-                        <ImageCard key={index} cardTitle={`Card ${card}`} imageSrc={Dog} />
+                        <ImageCard
+                            key={index}
+                            cardTitle={`Card ${card}`}
+                        />
                     ))}
                 </div>
             </div>
@@ -23,7 +27,10 @@ const LineWithImg:React.FC = () => {
                 </svg>
                 <div className="image-card-container">
                     {cards.map((card, index) => (
-                        <ImageCard key={index} cardTitle={`Card ${card}`} imageSrc={Dog} />
+                        <ImageCard
+                            key={index}
+                            cardTitle={`Card ${card}`}
+                        />
                     ))}
                 </div>
             </div>
@@ -33,7 +40,10 @@ const LineWithImg:React.FC = () => {
                 </svg>
                 <div className="image-card-container">
                     {cards.map((card, index) => (
-                        <ImageCard key={index} cardTitle={`Card ${card}`} imageSrc={Dog} />
+                        <ImageCard
+                            key={index}
+                            cardTitle={`Card ${card}`}
+                        />
                     ))}
                 </div>
             </div>
