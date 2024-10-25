@@ -6,10 +6,9 @@ import CalendarButton from "../../Component/Buttons/CalendarButton/CalendarButto
 import {saveDiaryData, loadDiaryData} from "../../Component/FireBase/FireBase";
 import Save from "../../Assets/dog-save.png";
 import {useHandleImage} from "../../Features/HandleImage/HandleImage";
+import {useToggle} from "../../Features/Toggle/Toggle";
 
 const DiaryPage:React.FC = () => {
-    const [isMenuOpen, setMenuOpen] = useState(false);
-    const [isCalendarOpen, setCalendarOpen] = useState(false);
     const [isDataSaved, setDataSaved] = useState<boolean | null>(null);
     const [showSaveMessage, setShowSaveMessage] = useState<boolean>(false);
 
@@ -20,6 +19,7 @@ const DiaryPage:React.FC = () => {
     const [content, setContent] = useState('');
 
     const { selectedImage, setSelectedImage, fileInputRef, handleImageChange, handleImageClick } = useHandleImage();
+    const { isMenuOpen, isCalendarOpen, toggleMenu, toggleCalendar } = useToggle();
 
     const day = selectedDate.toLocaleDateString('en-CA');
 
@@ -27,21 +27,9 @@ const DiaryPage:React.FC = () => {
         setWeather(weatherType);
     }
 
-    function toggleMenu() {
-        setMenuOpen((prev) => !prev);
-        // console.log("Menu",isMenuOpen)
-    }
-
-    function toggleCalendar() {
-        setCalendarOpen((prev) => !prev);
-        setMenuOpen(false);
-        // console.log("Calendar",isCalendarOpen)
-    }
-
     function goToDay(day: Date) {
         setSelectedDate(day)
-        setCalendarOpen(false);
-        setMenuOpen(false);
+        toggleCalendar();
         // console.log('today is ', day)
     }
 

@@ -7,7 +7,7 @@ import "./Calendar.css";
 type ValuePiece = Date | null;
 type Value = ValuePiece | [ValuePiece, ValuePiece];
 
-type CalendarProps = {
+interface CalendarProps {
     value: Value;
     onChange: (date: Value) => void;
     onClickDay: (day: Date) => void;
