@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import "./ImageCard.css";
 import {useHandleImage} from "../../../Features/HandleImage/HandleImage";
 import {loadGalleryData, saveGalleryData} from "../../../Component/FireBase/FireBase";
+import Upload from "../../../Assets/upload.png";
 
 interface ImageCardProps {
     day: string;
@@ -45,12 +46,18 @@ const ImageCard:React.FC<ImageCardProps> = ({ day, imageId }) => {
                         onClick={handleImageClick}
                     />
                 ) : (
-                    <input
-                        id="fileInput"
-                        type="file"
-                        accept="image/*"
-                        onChange={handleImageChangeAndSave}
-                    />
+                    <>
+                        <label className="custom-file-upload">
+                            <img src={Upload} alt="" className="upload-img"/>
+                            <p>Upload</p>
+                            <input
+                                id="fileInput"
+                                type="file"
+                                accept="image/*"
+                                onChange={handleImageChangeAndSave}
+                            />
+                        </label>
+                    </>
                 )}
                 <input
                     type="file"
