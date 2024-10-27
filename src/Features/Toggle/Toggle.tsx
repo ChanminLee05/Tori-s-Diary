@@ -1,40 +1,46 @@
 import {useState} from "react";
+import {useNavigate} from "react-router-dom";
 
 interface ToggleFunctions {
     isMenuOpen: boolean;
-    isCalendarOpen: boolean;
     isGalleryOpen: boolean;
+    isDiaryOpen: boolean;
     toggleMenu: () => void;
-    toggleCalendar: () => void;
     toggleGallery: () => void;
+    toggleDiary: () => void;
 }
 
 export function useToggle(): ToggleFunctions {
     const [isMenuOpen, setMenuOpen] = useState(false);
-    const [isCalendarOpen, setCalendarOpen] = useState(false);
     const [isGalleryOpen, setGalleryOpen] = useState(false);
+    const [isDiaryOpen, setDiaryOpen] = useState(false);
+    const navigate = useNavigate();
+
     function toggleMenu() {
         setMenuOpen((prev) => !prev);
         // console.log("Menu",isMenuOpen)
     }
 
-    function toggleCalendar() {
-        setCalendarOpen((prev) => !prev);
+    function toggleGallery() {
         setMenuOpen(false);
-        // console.log("Calendar",isCalendarOpen)
+        setGalleryOpen(true);
+        navigate('/gallery');
+        // console.log("Gallery", isGalleryOpen)
     }
 
-    function toggleGallery() {
-        setGalleryOpen(prev => !prev);
-        setMenuOpen(false); // Close menu when opening gallery, if necessary
+    function toggleDiary() {
+        setDiaryOpen(prev => !prev);
+        setMenuOpen(false);
+        navigate('/diary');
+        // console.log("Diary", isDiaryOpen)
     }
 
     return {
         isMenuOpen,
-        isCalendarOpen,
         isGalleryOpen,
+        isDiaryOpen,
         toggleMenu,
-        toggleCalendar,
         toggleGallery,
+        toggleDiary,
     };
 }

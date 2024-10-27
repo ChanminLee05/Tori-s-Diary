@@ -1,35 +1,22 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import "./GalleryPage.css";
 import LineWithImg from "./SaggingLineWithImg/LineWithImg";
-import CalendarButton from "../../Component/Buttons/CalendarButton/CalendarButton";
-import {useToggle} from "../../Features/Toggle/Toggle";
+import MenuButton from "../../Component/Buttons/MenuButton/MenuButton";
 import CalendarComponent from "../../Component/Calendar/Calendar";
-import {Value} from "react-calendar/dist/cjs/shared/types";
+import useCalendar from "../../Features/Calendar/UseCalendar";
 
 const GalleryPage:React.FC = () => {
-    const { isMenuOpen, isCalendarOpen, toggleMenu, toggleCalendar } = useToggle();
-    const [value, onChange] = useState<Value>(new Date());
-    const [selectedDate, setSelectedDate] = useState(new Date());
-
-    function goToDay(day: Date) {
-        setSelectedDate(day)
-        toggleCalendar();
-        // console.log('today is ', day)
-    }
+    const { isCalendarOpen, toggleCalendar, value, onChange, selectedDate, goToDay } = useCalendar();
 
     return (
         <div className="gallery-page">
             <LineWithImg selectedDate={selectedDate}/>
-            <CalendarButton
-                isToggleMenu={isMenuOpen}
-                toggleMenu={toggleMenu}
-                toggleCalendar={toggleCalendar}
-            />
+            <MenuButton toggleCalendar={toggleCalendar}/>
             <CalendarComponent
+                isCalendarOpen={isCalendarOpen}
                 value={value}
                 onChange={onChange}
                 onClickDay={goToDay}
-                isToggleCalendar={isCalendarOpen}
             />
         </div>
     );

@@ -21,7 +21,7 @@
 .open-menu-btn.expanded {
     width: 15vw;
     clip-path: ellipse(71% 66% at 83% 50%);
-    .calendar-icon, .gallery-icon {
+    .calendar-icon, .gallery-icon, .diary-icon {
         display: block;
         margin-right: 20px;
     }
@@ -37,7 +37,7 @@
     align-items: center;
     justify-content: center;
 }
-.calendar-icon, .gallery-icon {
+.calendar-icon, .gallery-icon, .diary-icon {
     display: none;
 }
 
