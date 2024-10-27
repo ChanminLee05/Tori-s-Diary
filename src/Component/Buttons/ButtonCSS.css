@@ -64,13 +64,13 @@
 
 @media (max-width: 576px) {
     .open-menu-btn {
-        width: 23vw;
-        height: 23vw;
+        width: 20vw;
+        height: 20vw;
         clip-path: circle(50.0% at 100% 50%);
     }
     .open-menu-btn:hover {
-        width: 25vw;
-        height: 25vw;
+        width: 22vw;
+        height: 22vw;
     }
     .open-menu-btn.expanded {
         width: 53vw;
@@ -85,5 +85,14 @@
         width: 6vw;
         height: 6vw;
         margin-right: 2vw;
+    }
+}
+
+@media screen and (min-width: 380px) and (max-width: 576px) {
+    .toggle-icon {
+        margin-right: -1vw;
+    }
+    .calendar-icon {
+        margin: 0 2vw;
     }
 }

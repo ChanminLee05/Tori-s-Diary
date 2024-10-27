@@ -245,7 +245,6 @@
     }
     .diary-back {
         min-width: 250px;
-        right: 7.1rem;
         bottom: -0.5rem;
     }
     .diary-footer {
@@ -272,7 +271,7 @@
         font-size: 0.7rem;
     }
 
-    /*Paw-image*/
+    /* Paw-image */
     .fa-paw {
         font-size: 1.5rem;
     }
@@ -288,5 +287,14 @@
         font-size: 2rem;
         right: 1rem;
         top: 15rem;
+    }
+}
+
+@media screen and (min-width: 380px) and (max-width: 576px) {
+    .diary-cover {
+        left: 46%;
+    }
+    .diary-back {
+        transform: translate(-51%, -47%);
     }
 }
