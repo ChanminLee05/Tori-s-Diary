@@ -64,13 +64,13 @@
 
 @media (max-width: 576px) {
     .open-menu-btn {
-        width: 25vw;
-        height: 25vw;
+        width: 23vw;
+        height: 23vw;
         clip-path: circle(50.0% at 100% 50%);
     }
     .open-menu-btn:hover {
-        width: 27vw;
-        height: 27vw;
+        width: 25vw;
+        height: 25vw;
     }
     .open-menu-btn.expanded {
         width: 53vw;

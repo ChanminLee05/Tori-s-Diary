@@ -2,12 +2,12 @@
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    gap: 2vw;
+    gap: 3vw;
     padding-bottom: 2vw;
     width: 100%;
 }
 .card {
-    width: 13rem;
+    width: 15rem;
     border: none;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     position: relative;
@@ -48,26 +48,71 @@
     height: 30px;
     background-color: #93442b;
 }
+.card-inside input[type="file"] {
+    width: 100%;
+    font-size: 16px;
+}
+.card-inside input[type="file"]::file-selector-button {
+    border-radius: 5px;
+    outline: none;
+    cursor: pointer;
+    overflow-x: hidden;
+    content: "Upload Image";
+}
 
 /*Card-position*/
 .line-card:nth-child(1) {
-    top: -5px;
+    top: 5px;
 }
 .line-card:nth-child(2) {
-    top: 8px;
+    top: 15px;
 }
 .line-card:nth-child(3) {
-    top: 13px;
-}
-.line-card:nth-child(4) {
     top: 18px;
 }
+.line-card:nth-child(4) {
+    top: 15px;
+}
 .line-card:nth-child(5) {
-    top: 13px;
+    top: 5px;
 }
-.line-card:nth-child(6) {
-    top: 8px;
-}
-.line-card:nth-child(7) {
-    top: -5px;
+
+/*Mobile-size*/
+@media (max-width: 576px) {
+    .card {
+        width: 20vw;
+    }
+    .image-card-container {
+        gap: 2vw;
+    }
+    .card-img-top {
+        height: 13vw;
+    }
+    .line-card::before {
+        top: -25px;
+        height: 25px;
+    }
+    /*Card-position*/
+    .line-card:nth-child(1) {
+        top: 12px;
+    }
+    .line-card:nth-child(2) {
+        top: 18px;
+    }
+    .line-card:nth-child(3) {
+        top: 20px;
+    }
+    .line-card:nth-child(4) {
+        top: 18px;
+    }
+    .line-card:nth-child(5) {
+        top: 12px;
+    }
+    .card-inside input[type="file"] {
+        font-size: 14px;
+    }
+    .card-inside input[type="file"]::file-selector-button {
+        width: 17vw;
+        overflow-x: hidden;
+    }
 }

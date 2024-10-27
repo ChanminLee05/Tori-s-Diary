@@ -4,7 +4,7 @@ import ImageCard from "../ImageCard/ImageCard";
 
 
 const LineWithImg:React.FC<{ selectedDate: Date }> = ({ selectedDate }) => {
-    const cards = [1, 2, 3, 4, 5, 6, 7];
+    const cards = [1, 2, 3, 4, 5];
 
     const formattedDate = selectedDate.toLocaleDateString('en-CA');
 
@@ -27,7 +27,7 @@ const LineWithImg:React.FC<{ selectedDate: Date }> = ({ selectedDate }) => {
                 </svg>
                 <div className="image-card-container">
                     {cards.map((_, i) => (
-                        <ImageCard key={i + 7} day={formattedDate} imageId={`image-${i + 8}`} />
+                        <ImageCard key={i + 5} day={formattedDate} imageId={`image-${i + 5}`} />
                     ))}
                 </div>
             </div>
@@ -38,7 +38,7 @@ const LineWithImg:React.FC<{ selectedDate: Date }> = ({ selectedDate }) => {
                 </svg>
                 <div className="image-card-container">
                     {cards.map((_, i) => (
-                        <ImageCard key={i + 14} day={formattedDate} imageId={`image-${i + 15}`} />
+                        <ImageCard key={i + 10} day={formattedDate} imageId={`image-${i + 10}`} />
                     ))}
                 </div>
             </div>

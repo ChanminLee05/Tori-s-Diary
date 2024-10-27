@@ -46,6 +46,7 @@ const ImageCard:React.FC<ImageCardProps> = ({ day, imageId }) => {
                     />
                 ) : (
                     <input
+                        id="fileInput"
                         type="file"
                         accept="image/*"
                         onChange={handleImageChangeAndSave}

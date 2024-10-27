@@ -194,9 +194,6 @@
 
 /*Mobile-size*/
 @media (max-width: 576px) {
-    .diary-page-open {
-
-    }
     .page-opened {
         flex-direction: column;
         font-size: 3vw;
