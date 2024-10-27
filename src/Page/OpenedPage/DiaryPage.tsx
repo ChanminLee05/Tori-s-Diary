@@ -1,36 +1,27 @@
 import React, {useEffect, useRef, useState} from 'react';
 import "./DiaryPage.css";
 import CalendarComponent from "../../Component/Calendar/Calendar";
-import {Value} from "react-calendar/dist/cjs/shared/types";
-import CalendarButton from "../../Component/Buttons/CalendarButton/CalendarButton";
+import MenuButton from "../../Component/Buttons/MenuButton/MenuButton";
 import {saveDiaryData, loadDiaryData} from "../../Component/FireBase/FireBase";
 import Save from "../../Assets/dog-save.png";
 import {useHandleImage} from "../../Features/HandleImage/HandleImage";
-import {useToggle} from "../../Features/Toggle/Toggle";
+import useCalendar from "../../Features/Calendar/UseCalendar";
 
 const DiaryPage:React.FC = () => {
     const [isDataSaved, setDataSaved] = useState<boolean | null>(null);
     const [showSaveMessage, setShowSaveMessage] = useState<boolean>(false);
 
-    const [value, onChange] = useState<Value>(new Date());
-    const [selectedDate, setSelectedDate] = useState(new Date());
     const [weather, setWeather] = useState('');
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
 
     const { selectedImage, setSelectedImage, fileInputRef, handleImageChange, handleImageClick } = useHandleImage();
-    const { isMenuOpen, isCalendarOpen, toggleMenu, toggleCalendar } = useToggle();
+    const { isCalendarOpen, toggleCalendar, value, onChange, selectedDate, goToDay } = useCalendar();
 
     const day = selectedDate.toLocaleDateString('en-CA');
 
     function handleWeatherSelection(weatherType: string) {
         setWeather(weatherType);
-    }
-
-    function goToDay(day: Date) {
-        setSelectedDate(day)
-        toggleCalendar();
-        // console.log('today is ', day)
     }
 
     async function handleSave(e: React.MouseEvent<HTMLButtonElement>) {
@@ -68,16 +59,12 @@ const DiaryPage:React.FC = () => {
 
     return (
         <section className="diary-page-open">
-            <CalendarButton
-                isToggleMenu={isMenuOpen}
-                toggleMenu={toggleMenu}
-                toggleCalendar={toggleCalendar}
-            />
+            <MenuButton toggleCalendar={toggleCalendar}/>
             <CalendarComponent
+                isCalendarOpen={isCalendarOpen}
                 value={value}
                 onChange={onChange}
                 onClickDay={goToDay}
-                isToggleCalendar={isCalendarOpen}
             />
             <div className={`diary-paper ${isCalendarOpen ? 'blur' : ''}`}>
                 <div className="page-opened">

@@ -11,10 +11,10 @@ interface CalendarProps {
     value: Value;
     onChange: (date: Value) => void;
     onClickDay: (day: Date) => void;
-    isToggleCalendar: boolean;
-};
+    isCalendarOpen: boolean;
+}
 
-const CalendarComponent:React.FC<CalendarProps> = ({ value, onChange, onClickDay, isToggleCalendar}) => {
+const CalendarComponent:React.FC<CalendarProps> = ({ value, onChange, onClickDay, isCalendarOpen }) => {
 
     useEffect(() => {
         const abbrElements = document.querySelectorAll('.react-calendar__month-view__weekdays abbr');
@@ -27,7 +27,7 @@ const CalendarComponent:React.FC<CalendarProps> = ({ value, onChange, onClickDay
     }, []);
 
     return (
-        <div className={`calendar ${isToggleCalendar ? 'active' : 'close'}`}>
+        <div className={`calendar ${isCalendarOpen ? 'active' : 'close'}`}>
             <Calendar
                 onChange={onChange}
                 value={value}
