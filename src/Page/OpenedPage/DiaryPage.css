@@ -123,8 +123,8 @@
             transparent 45px);
     background-size: 47px 52px;
     line-height: 50px;
-    letter-spacing: 23px;
-    word-spacing: 22px;
+    letter-spacing: 20px;
+    word-spacing: 20px;
     font-size: 1.5vw;
     overflow-y: hidden;
     font-family: var(--diary-font);
