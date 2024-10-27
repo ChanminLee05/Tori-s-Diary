@@ -25,7 +25,13 @@
     visibility: hidden;
     pointer-events: none;
 }
-
+.dog-calendar-img {
+    position: absolute !important;
+    width: 3.5vw !important;
+    bottom: -3px !important;
+    left: 28px !important;
+    opacity: 0.5 !important;
+}
 @keyframes slideIn {
     0% {
         right: 0;
@@ -82,4 +88,26 @@
 
 abbr {
     font-weight: bolder;
+}
+
+@media (max-width: 576px){
+    .calendar {
+        width: 80%;
+        position: absolute !important;
+        right: 10% !important;
+        top: 10%;
+    }
+    .react-calendar {
+        font-size: 5vw !important;
+    }
+    .react-calendar__tile {
+        height: 20vw !important;
+    }
+    .dog-calendar-img {
+        position: absolute !important;
+        width: 8vw !important;
+        bottom: 21px !important;
+        left: -1px !important;
+        opacity: 0.5 !important;
+    }
 }
