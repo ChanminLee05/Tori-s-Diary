@@ -10,7 +10,7 @@
 .diary-paper {
     background-color: var(--diary-color);
     height: 94vh;
-    width: 58vw;
+    width: 60vw;
     border-radius: 10px;
     display: flex;
     align-items: center;
@@ -123,8 +123,8 @@
             transparent 45px);
     background-size: 43px 45px;
     line-height: 45px;
-    letter-spacing: 20px;
-    word-spacing: 18px;
+    letter-spacing: 1.5vw;
+    word-spacing: 1vw;
     font-size: 1.5vw;
     overflow-y: hidden;
     font-family: var(--diary-font);
