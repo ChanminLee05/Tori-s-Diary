@@ -10,4 +10,13 @@
     height: 3vw;
 }
 
+@media (max-width: 576px) {
+    .photo-container {
+        height: 50vw;
+    }
+    .sagging-line {
+        height: 5vw;
+        margin-top: 10vw;
+    }
+}
 
