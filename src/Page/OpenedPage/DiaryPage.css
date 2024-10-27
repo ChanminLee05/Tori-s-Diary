@@ -10,7 +10,7 @@
 .diary-paper {
     background-color: var(--diary-color);
     height: 94vh;
-    width: 60vw;
+    width: 60.6vw;
     border-radius: 10px;
     display: flex;
     align-items: center;
@@ -123,8 +123,8 @@
             transparent 45px);
     background-size: 43px 45px;
     line-height: 45px;
-    letter-spacing: 1.5vw;
-    word-spacing: 1vw;
+    letter-spacing: 1.3rem;
+    word-spacing: 1rem;
     font-size: 1.5vw;
     overflow-y: hidden;
     font-family: var(--diary-font);
@@ -266,5 +266,15 @@
         letter-spacing: 4.7vw;
         word-spacing: 1.5vw;
         font-size: 4.5vw;
+    }
+}
+
+@media screen and (max-width: 1745px) {
+    .text-grid {
+        background-size: 32px 29px;
+        line-height: 29px;
+        letter-spacing: 1.3rem;
+        word-spacing: 1rem;
+        font-size: 1.5vw;
     }
 }
