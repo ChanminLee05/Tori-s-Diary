@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import "./DiaryPage.css";
 import CalendarComponent from "../../Component/Calendar/Calendar";
 import MenuButton from "../../Component/Buttons/MenuButton/MenuButton";

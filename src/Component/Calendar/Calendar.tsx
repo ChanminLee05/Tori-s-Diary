@@ -36,14 +36,11 @@ const CalendarComponent:React.FC<CalendarProps> = ({ value, onChange, onClickDay
                     view === 'month' && (
                         <div style={{ position: 'relative' }}>
                             <img
+                                className="dog-calendar-img"
                                 src={Dog}
                                 alt="Dog"
                                 style={{
-                                    width: '3.5vw',
-                                    position: 'absolute',
-                                    bottom: '-3px',
-                                    left: '28px',
-                                    opacity: '0.5',
+
                                 }}
                             />
                         </div>
