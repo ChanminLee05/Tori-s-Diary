@@ -27,7 +27,7 @@ const LineWithImg:React.FC<{ selectedDate: Date }> = ({ selectedDate }) => {
                 </svg>
                 <div className="image-card-container">
                     {cards.map((_, i) => (
-                        <ImageCard key={i + 5} day={formattedDate} imageId={`image-${i + 5}`} />
+                        <ImageCard key={i + 6} day={formattedDate} imageId={`image-${i + 6}`} />
                     ))}
                 </div>
             </div>
@@ -38,7 +38,7 @@ const LineWithImg:React.FC<{ selectedDate: Date }> = ({ selectedDate }) => {
                 </svg>
                 <div className="image-card-container">
                     {cards.map((_, i) => (
-                        <ImageCard key={i + 10} day={formattedDate} imageId={`image-${i + 10}`} />
+                        <ImageCard key={i + 11} day={formattedDate} imageId={`image-${i + 11}`} />
                     ))}
                 </div>
             </div>
